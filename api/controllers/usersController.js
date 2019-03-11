@@ -1,0 +1,17 @@
+exports.signUp = require('./users/signup').signup;
+exports.login = require('./users/login').login;
+exports.deleteUser = require('./users/deleteUser').deleteUser;
+exports.updateCustomizedTags = require('./users/updateCustomizedTags').updateCustomizedTags;
+exports.updateUserAnalytics = require('./users/updateUserAnalytics').updateUserAnalytics;
+exports.editUser = require('./users/editUser').editUser;
+exports.facebookAuthentication = require('./users/facebookAuthentication').facebookAuthentication;
+exports.getUser = require('./users/getUser').getUser;
+exports.forgotPassword = require('./users/forgotPassword').forgotPassword;
+exports.forgotPasswordChange = require('./users/forgotPasswordChange').forgotPaswordChange;
+exports.getTopUsers = require('./users/getTopUsers').getTopUsers;
+exports.ctaUser = require('./users/ctaUser').ctaUser;
+exports.updateUserOrganization = require('./users/updateUserOrganization').updateUserOrganization;
+exports.addCourseVideosWatched = require('./users/addCourseVideosWatched').addCourseVideosWatched;
+exports.addCourseQuizPlayed = require('./users/addQuizzesPlayed').addCourseQuizPlayed;
+exports.createStripeAccount = require('./users/createStripeAccount').createStripeAccount;
+exports.handleCoursePayment = require('./users/handleCoursePayment').handleCoursePayment;
