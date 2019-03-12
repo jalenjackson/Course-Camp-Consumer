@@ -3,7 +3,7 @@ services:
   web:
     build: .
     ports:
-    - "80:80"
+    - "80:8000"
     restart: always
     environment:
     - MONGO_USER=jalenjackson
