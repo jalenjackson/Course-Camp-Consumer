@@ -45,7 +45,7 @@ const mongoEnv = dev ? 'development' : 'production';
 return mongoose.connect(`mongodb+srv://${ process.env.MONGO_USER }:${ process.env.MONGO_PASSWORD }@coursecamp-qxarr.mongodb.net/${ mongoEnv }?retryWrites=true`,
   { useNewUrlParser: true })
   .then(() => {
-    server.listen(PORT, () => console.log(`Course Camp API Running On PORT ${ PORT }`));
+    server.listen(PORT, () => console.log(`Course Camp API Running`));
   })
   .catch(err => console.log(err));
 
