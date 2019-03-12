@@ -43,7 +43,7 @@ app.use('/api-routes', APIRoutes);
 app.use('/graphql', graphQlHTTP({
   schema,
   rootValue,
-  graphiql: true
+  graphiql: dev
 }));
 
 app.use(function(req, res) {
