@@ -40,6 +40,12 @@ server.use('/graphql', graphQlHTTP({
   graphiql: true
 }));
 
+server.use(function(req, res) {
+  res.status(200).json({
+    error: 'The requested url was not found'
+  })
+});
+
 const mongoEnv = dev ? 'development' : 'production';
 
 return mongoose.connect(`mongodb+srv://${ process.env.MONGO_USER }:${ process.env.MONGO_PASSWORD }@coursecamp-qxarr.mongodb.net/${ mongoEnv }?retryWrites=true`,
