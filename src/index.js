@@ -1,5 +1,6 @@
 require('dotenv').config();
 const express = require('express');
+const http = require('http');
 const bodyParser = require('body-parser');
 const graphQlHTTP = require('express-graphql');
 const mongoose = require('mongoose');
@@ -12,12 +13,17 @@ const APIRoutes = require('./APIRoutes/index');
 const dev = process.env.NODE_ENV !== 'production';
 const PORT = process.env.PORT || 8080;
 
-const server = express();
-server.use(bodyParser.json());
-server.use(bodyParser.urlencoded({ extended: true }));
-server.use(bodyParser.json());
+const mongoEnv = dev ? 'development' : 'production';
 
-server.use((req, res, next) => {
+mongoose.connect(`mongodb+srv://${ process.env.MONGO_USER }:${ process.env.MONGO_PASSWORD }@coursecamp-qxarr.mongodb.net/${ mongoEnv }?retryWrites=true`,
+  { useNewUrlParser: true });
+
+const app = express();
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+
+app.use((req, res, next) => {
   let allowedOrigins = ['http://localhost:5000'];
   let origin = req.headers.origin;
   if (allowedOrigins.indexOf(origin) > -1){
@@ -31,27 +37,21 @@ server.use((req, res, next) => {
   next();
 });
 
-server.use(VerifyAuthentication);
-server.use('/uploaders', Uploaders);
-server.use('/api-routes', APIRoutes);
-server.use('/graphql', graphQlHTTP({
+app.use(VerifyAuthentication);
+app.use('/uploaders', Uploaders);
+app.use('/api-routes', APIRoutes);
+app.use('/graphql', graphQlHTTP({
   schema,
   rootValue,
   graphiql: true
 }));
 
-server.use(function(req, res) {
+app.use(function(req, res) {
   res.status(200).json({
     error: 'The requested url was not found'
   })
 });
 
-const mongoEnv = dev ? 'development' : 'production';
+const server = http.createServer(app);
 
-return mongoose.connect(`mongodb+srv://${ process.env.MONGO_USER }:${ process.env.MONGO_PASSWORD }@coursecamp-qxarr.mongodb.net/${ mongoEnv }?retryWrites=true`,
-  { useNewUrlParser: true })
-  .then(() => {
-    server.listen(PORT, () => console.log(`Course Camp API Running`));
-  })
-  .catch(err => console.log(err));
-
+server.listen(PORT);
