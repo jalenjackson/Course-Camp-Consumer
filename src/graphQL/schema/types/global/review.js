@@ -1,6 +1,6 @@
 exports.Review = `
   type Review {
-    userId: String!
+    userId: User
     rating: Float!
     description: String!
   }
