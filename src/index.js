@@ -29,7 +29,7 @@ app.use((req, res, next) => {
   if (allowedOrigins.indexOf(origin) > -1){
     res.setHeader('Access-Control-Allow-Origin', origin);
   }
-  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization, currentsection');
   res.header('Access-Control-Allow-Methods', 'DELETE, PUT, POST, PATCH, GET');
   
   if (req.method === 'OPTIONS') {

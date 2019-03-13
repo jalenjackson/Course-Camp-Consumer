@@ -7,7 +7,6 @@ exports.call = async (req, res) => {
   switch(req.body.status) {
     case 'Unpublished': {
       course.reviewCourse = {};
-      course.publishedCourse = {};
       await course.save();
       return success(res);
     }

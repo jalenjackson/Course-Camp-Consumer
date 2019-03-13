@@ -28,7 +28,7 @@ exports.reviewCourse = async (args, req) => {
       addReviews += review.rating;
     });
     
-    course.overallRating = addReviews / reviews.length;
+    course.rating = addReviews / reviews.length;
     course.reviews = reviews;
     
     course.markModified('reviews');
