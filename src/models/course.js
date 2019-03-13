@@ -59,9 +59,6 @@ const CourseSchema = new Schema({
   },
   reviews: {
     type: Array
-  },
-  overallRating: {
-    type: Number
   }
 });
 
