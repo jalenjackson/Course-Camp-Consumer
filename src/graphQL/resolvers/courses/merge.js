@@ -36,6 +36,11 @@ const TransformObject = k => {
     _id: k.id,
     date: dateToString(k._doc.date),
     creator: MongoFindUser.bind(this, k._doc.creator),
+    reviews: k._doc.reviews.map(async review => {
+      const tmpReview = review;
+      tmpReview.userId = await MongoFindUser.bind(this, review.userId);
+      return tmpReview;
+    })
   }
 };
 

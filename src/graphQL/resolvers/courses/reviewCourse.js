@@ -1,5 +1,5 @@
 const Course =  require('../../../models/course');
-const { TransformObject, MongoFindUser } = require('./merge');
+const { TransformObject } = require('./merge');
 
 exports.reviewCourse = async (args, req) => {
   try {
@@ -10,7 +10,7 @@ exports.reviewCourse = async (args, req) => {
     if (!reviews) reviews = [];
     
     const review = {
-      userId: MongoFindUser.bind(this, req.userId),
+      userId: req.userId,
       rating,
       description
     };
