@@ -7,7 +7,7 @@ exports.globalAutocomplete = async (args) => {
     const regex = new RegExp(queryREQ, 'i');
     const courses = await Course.find({
       $or: [{ title: regex }, { description: regex }, { category: regex }],
-      'status': 'Approved'
+      'publishedCourse': { $exists: true }
     },
     { '_id': 1,
       'title': 1,
@@ -18,6 +18,7 @@ exports.globalAutocomplete = async (args) => {
       'image': 1,
       'rating': 1,
       'creator': 1,
+      'reviews': 1,
       'date': 1,
       'summary': 1,
       'sections': 1
