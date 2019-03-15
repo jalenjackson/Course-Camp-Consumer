@@ -1,7 +1,7 @@
 const User = require('../../../models/user');
 const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
 const { TransformObject } = require('./merge');
+const { createUserToken } = require('../global/createToken');
 
 exports.createUser = async args => {
   try {
@@ -17,13 +17,7 @@ exports.createUser = async args => {
       moneyMade: 0
     });
     const result = await createdUser.save();
-    const token = await jwt.sign({
-      userId: result.id,
-      email: result.email,
-      name: result.name
-    }, process.env.JWT_SECRET_KEY, {
-      expiresIn: '1h'
-    });
+    const token = await createUserToken(result);
     return {
       ...result._doc,
       password: null,
@@ -41,13 +35,7 @@ exports.login = async ({ email, password }) => {
   if (!doesPasswordMatchCurrentBcryptHash) {
     throw new Error('Password is incorrect');
   }
-  const token = await jwt.sign({
-    userId: user.id,
-    email: user.email,
-    name: user.name
-  }, process.env.JWT_SECRET_KEY, {
-    expiresIn: '1h'
-  });
+  const token = await createUserToken(user);
   
   return { token, ...TransformObject(user) };
 };

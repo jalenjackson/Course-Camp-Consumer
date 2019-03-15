@@ -1,5 +1,4 @@
 const ForumQuestion = require('../../../models/forumQuestion');
-const User = require('../../../models/user');
 const { TransformObject } = require('./merge');
 
 exports.addForumQuestionAnswer = async (args, req) => {
@@ -8,14 +7,14 @@ exports.addForumQuestionAnswer = async (args, req) => {
     let answers = forumQuestion.answers;
     
     const answer = {
-      userId: '5c70f8cedf19c1444c2ecc14',
+      userId: req.userId,
       answer: args.answer,
       date: new Date().toISOString()
     };
     
     if (!forumQuestion.answers) answers = [];
     
-    const userIndex = answers.findIndex(answer => answer.userId === '5c70f8cedf19c1444c2ecc14');
+    const userIndex = answers.findIndex(answer => answer.userId === req.userId);
     
     if (userIndex === -1) {
       answers.push(answer)

@@ -16,12 +16,7 @@ exports.deleteVideo = async (args, req) => {
       throw new Error('Unauthenticated!');
     }
 
-    s3.deleteObject({ Bucket: 'new-company-videos', Key: args.fileId }, function(err) {
-      if (err) {
-        console.log(err)
-      }
-      console.log('it deleted')
-    });
+    s3.deleteObject({ Bucket: 'new-company-videos', Key: args.fileId });
 
     const course = await Course.findById(args.courseId);
     if (course.sections) {

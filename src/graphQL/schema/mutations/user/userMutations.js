@@ -3,4 +3,5 @@ exports.userMutations = `
   handleBoughtCourse(courseId: String!, amountPaid: Float!): User
   handlePayout(receiver: String!, amount: Float!): User
   uploadProfileImage(image: String!): User
+  changeUserInfo(name: String, email: String): User
 `;

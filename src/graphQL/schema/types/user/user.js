@@ -22,6 +22,7 @@ exports.User = `
     tokenExpiration: Int!
     email: String!
     name: String!
+    createdCourses: [Course!]
     paidCourses: [Course!]
     moneyMade: Float!
     courseProgress: [CourseProgress]

@@ -7,13 +7,13 @@ mongoose.connect(`mongodb+srv://jalenjackson:dumofkH3BtYq9yZv@coursecamp-qxarr.m
   .then(() => {
     createXCourses();
   })
-  .catch(err => throw err);
+  .catch(err => console.log(err));
 
 const createXCourses = async () => {
   try {
     for (let i = 0; i < 40; i++) {
       console.log('course started');
-      const course = new Course({
+      const courseObj = {
         title: `Course ${ i + 1 }`,
         description: `Course description ${ i + 1 }`,
         category: `Course description ${ i + 1 }`,
@@ -22,11 +22,15 @@ const createXCourses = async () => {
         language: 'English',
         learning: 'test,cool,yeah',
         date: new Date().toISOString(),
-        status: 'Unpublished',
+        status: 'Approved',
         rating: 0,
         creator: '5c895a2748de2f0011dbc133',
         summary: `Course summary ${ i + 1 }`
-      });
+      };
+      
+      const course = new Course(courseObj);
+      course.publishedCourse = courseObj;
+      
       await course.save();
       const user = await User.findById('5c895a2748de2f0011dbc133');
       if(!user) console.log('no user');

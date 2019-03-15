@@ -1,4 +1,4 @@
 exports.forumQuestionQueries = `
-  forumQuestions: [ForumQuestion]
+  forumQuestions(limit: Float, skip: Float): ForumQuestionArray
   singleForumQuestion(forumQuestionId: String!): ForumQuestion!
 `;

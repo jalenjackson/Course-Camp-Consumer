@@ -3,6 +3,7 @@ const { handleBoughtCourse } = require('./handleBoughtCourse');
 const { handlePayout } = require('./handlePayout');
 const { getUser } = require('./getUser');
 const { uploadProfileImage } = require('./uploadProfileImage');
+const { changeUserInfo } = require('./changeUserInfo');
 
 module.exports = {
   handleBoughtCourse,
@@ -10,5 +11,6 @@ module.exports = {
   login,
   handlePayout,
   getUser,
-  uploadProfileImage
+  uploadProfileImage,
+  changeUserInfo
 };

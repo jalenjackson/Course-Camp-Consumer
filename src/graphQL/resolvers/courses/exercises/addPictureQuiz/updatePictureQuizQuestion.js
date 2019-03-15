@@ -22,12 +22,7 @@ exports.updatePictureQuizQuestion = async (args, req) => {
     if (args.type === 'Answer') {
       const currentActiveAnswer = section.videos[args.videoIndex].pictureQuiz[args.questionIndex].answers.split(',');
 
-      s3.deleteObject({ Bucket: 'new-company', Key: currentActiveAnswer[args.answerIndex].split('/')[3] }, function(err) {
-        if (err) {
-          console.log(err)
-        }
-        console.log('it deleted')
-      });
+      s3.deleteObject({ Bucket: 'new-company', Key: currentActiveAnswer[args.answerIndex].split('/')[3] });
 
       currentActiveAnswer[args.answerIndex] = args.term;
 

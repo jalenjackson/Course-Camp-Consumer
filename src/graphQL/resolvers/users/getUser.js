@@ -1,11 +1,16 @@
 const User =  require('../../../models/user');
-const Course =  require('../../../models/course');
+const jwt = require('jsonwebtoken');
 const { TransformObject } = require('./merge');
 
 exports.getUser = async (args, req) => {
   try {
     const user = await User.findById(req.userId);
-    return TransformObject(user);
+    const token = await jwt.sign({
+      userId: user._id,
+    }, process.env.JWT_SECRET_KEY, {
+      expiresIn: '1h'
+    });
+    return { token, ...TransformObject(user) };
   } catch (e) {
     throw e;
   }

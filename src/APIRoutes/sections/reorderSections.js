@@ -7,7 +7,6 @@ exports.call = async (req, res) => {
     await course.save();
     res.status(200).json({ message: 'Successfully reordered sections' });
   } catch (e) {
-    console.log(e)
     res.status(500).json({ error: true });
   }
 };

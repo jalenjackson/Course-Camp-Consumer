@@ -26,12 +26,6 @@ const UserSchema = new Schema({
       ref: 'ForumQuestion'
     }
   ],
-  createdQuizzes: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: 'Quiz'
-    }
-  ],
   isBusinessAccount: {
     type: Boolean,
     default: false

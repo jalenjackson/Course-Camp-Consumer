@@ -1,9 +1,11 @@
 const Course = require('../../../models/course');
+const { TransformObject } = require('../courses/merge');
 
-const TransformObject = k => {
+const TransformObjectUser = k => {
   return {
     ...k._doc,
-    paidCourses: MongoFindPaidCourses.bind(this, k._doc.paidCourses)
+    paidCourses: MongoFindPaidCourses.bind(this, k._doc.paidCourses),
+    createdCourses: MongoFindPaidCourses.bind(this, k._doc.createdCourses)
   }
 };
 
@@ -11,9 +13,9 @@ const MongoFindPaidCourses = async courseIds => {
   try {
     const courses = await Course.find({ _id: { $in: courseIds }});
     return courses.map(course => {
-      return course;
+      return TransformObject(course);
     });
   } catch (e) { throw e }
 };
 
-exports.TransformObject = TransformObject;
+exports.TransformObject = TransformObjectUser;

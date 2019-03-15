@@ -21,12 +21,7 @@ exports.deleteAddPictureQuizQuestion = async (args, req) => {
 
 
     sections.videos[args.videoIndex].pictureQuiz[args.questionIndex].answers.split(',').map((videoLink) => {
-      s3.deleteObject({ Bucket: 'new-company', Key: videoLink.split('/')[3] }, function(err) {
-        if (err) {
-          console.log(err)
-        }
-        console.log('it deleted')
-      });
+      s3.deleteObject({ Bucket: 'new-company', Key: videoLink.split('/')[3] });
     });
 
     sections.videos[args.videoIndex].pictureQuiz.splice(args.questionIndex, 1);
