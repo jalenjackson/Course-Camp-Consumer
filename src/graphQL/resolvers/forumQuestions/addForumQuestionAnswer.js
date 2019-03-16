@@ -1,5 +1,8 @@
 const ForumQuestion = require('../../../models/forumQuestion');
+const User = require('../../../models/user');
 const { TransformObject } = require('./merge');
+const { emailTemplate } = require('../../helpers/emailTemplates/answeredQuestion');
+const { sendEmail } = require('../../helpers/sendEmail');
 
 exports.addForumQuestionAnswer = async (args, req) => {
   try {
@@ -7,6 +10,7 @@ exports.addForumQuestionAnswer = async (args, req) => {
       throw new Error('Unauthenticated!');
     }
     const forumQuestion = await ForumQuestion.findById(args.forumQuestionId);
+    const creator = await User.findById(forumQuestion.creator);
     let answers = forumQuestion.answers;
     
     const answer = {
@@ -28,6 +32,9 @@ exports.addForumQuestionAnswer = async (args, req) => {
     forumQuestion.markModified('answers');
     forumQuestion.answers = answers;
     await forumQuestion.save();
+  
+    sendEmail(creator.email, 'Someone just answered your question!', emailTemplate(creator.name, forumQuestion));
+    
     return TransformObject(forumQuestion);
   } catch (e) {
     throw e

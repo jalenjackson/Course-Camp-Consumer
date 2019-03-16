@@ -2,7 +2,7 @@ const User =  require('../../../models/user');
 const Course =  require('../../../models/course');
 const { TransformObject } = require('./merge');
 const { sendEmail } = require('../../helpers/sendEmail');
-const { emailTemplate } = require('../../helpers/emailTemplates/handleBoughtCourse');
+const { emailTemplate, emailTemplate2 } = require('../../helpers/emailTemplates/handleBoughtCourse');
 
 exports.handleBoughtCourse = async (args, req) => {
   try {
@@ -24,6 +24,7 @@ exports.handleBoughtCourse = async (args, req) => {
    const seller = await User.findById(coursePaidFor.creator);
    seller.moneyMade += amountOwedToSeller;
    sendEmail(seller.email, 'Someone purchased your course!!', emailTemplate);
+   sendEmail(buyer.email, 'Thanks for purchasing a course!', emailTemplate2(buyer.name, coursePaidFor));
    await seller.save();
    return TransformObject(buyer);
   } catch (e) {

@@ -1,6 +1,8 @@
 "use strict";
 const paypal = require('paypal-rest-sdk');
 const User = require('../../../models/user');
+const { sendEmail } = require('../../helpers/sendEmail');
+const { emailTemplate } = require('../../helpers/emailTemplates/payout');
 
 paypal.configure({
   'mode': 'sandbox',
@@ -53,8 +55,11 @@ exports.handlePayout = async (args, req) => {
       
           user.payoutHistory = tmpPayoutHistory;
           user.moneyMade = newMoneyMadeAmount;
+  
+          sendEmail(user.email, 'Your PayPal transfer was completed!', emailTemplate(user.name, args.amount));
+  
           await user.save();
-      
+          
           return {};
         }
       });

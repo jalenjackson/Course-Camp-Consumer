@@ -2,6 +2,8 @@ const User = require('../../../models/user');
 const bcrypt = require('bcryptjs');
 const { TransformObject } = require('./merge');
 const { createUserToken } = require('../global/createToken');
+const { sendEmail } = require('../../helpers/sendEmail');
+const { emailTemplate } = require('../../helpers/emailTemplates/signUp');
 
 exports.createUser = async args => {
   try {
@@ -18,6 +20,9 @@ exports.createUser = async args => {
     });
     const result = await createdUser.save();
     const token = await createUserToken(result);
+    
+    sendEmail(result.email, 'Thanks for signing up to Course Camp!', emailTemplate(result.name));
+  
     return {
       ...result._doc,
       password: null,
