@@ -3,6 +3,9 @@ const { TransformObject } = require('./merge');
 
 exports.addForumQuestionAnswer = async (args, req) => {
   try {
+    if (!req.isTheUserAuthenticated) {
+      throw new Error('Unauthenticated!');
+    }
     const forumQuestion = await ForumQuestion.findById(args.forumQuestionId);
     let answers = forumQuestion.answers;
     

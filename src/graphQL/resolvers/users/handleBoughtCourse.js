@@ -1,11 +1,13 @@
 const User =  require('../../../models/user');
 const Course =  require('../../../models/course');
 const { TransformObject } = require('./merge');
+const { sendEmail } = require('../../helpers/sendEmail');
+const { emailTemplate } = require('../../helpers/emailTemplates/handleBoughtCourse');
 
 exports.handleBoughtCourse = async (args, req) => {
   try {
    const courseIdBuyerPaidFor = args.courseId;
-   const amountOwedToSeller = deductPercentageFromPayout(+args.amountPaid, 0.25);
+   const amountOwedToSeller = deductPercentageFromPayout(+args.amountPaid, 0.10);
    
    const buyer = await User.findById(req.userId);
    buyer.paidCourses.push(courseIdBuyerPaidFor);
@@ -21,6 +23,7 @@ exports.handleBoughtCourse = async (args, req) => {
    
    const seller = await User.findById(coursePaidFor.creator);
    seller.moneyMade += amountOwedToSeller;
+   sendEmail(seller.email, 'Someone purchased your course!!', emailTemplate);
    await seller.save();
    return TransformObject(buyer);
   } catch (e) {

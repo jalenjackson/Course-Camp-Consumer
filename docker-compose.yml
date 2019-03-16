@@ -17,3 +17,4 @@ services:
     - AWS_ACCESS_KEY=AKIAJTNL7SVP64EONENQ
     - AWS_SECRET=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
     - devKey=kTFtkpWpJhcupmQW
+    - gmailPassword=Bigship1!

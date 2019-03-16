@@ -4,6 +4,9 @@ const { TransformObject } = require('./merge');
 
 exports.createForumQuestion = async (args, req) => {
   try {
+    if (!req.isTheUserAuthenticated) {
+      throw new Error('Unauthenticated!');
+    }
     const forumQuestion = new ForumQuestion({
       course: args.forumQuestionInput.course,
       title: args.forumQuestionInput.title,
