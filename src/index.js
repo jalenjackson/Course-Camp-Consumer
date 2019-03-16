@@ -24,7 +24,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 app.use((req, res, next) => {
-  let allowedOrigins = ['http://localhost:5000', 'https://teamcoursecamp.com'];
+  let allowedOrigins = ['http://localhost:5000', 'http://localhost:3000', 'https://teamcoursecamp.com'];
   let origin = req.headers.origin;
   if (allowedOrigins.indexOf(origin) > -1){
     res.setHeader('Access-Control-Allow-Origin', origin);

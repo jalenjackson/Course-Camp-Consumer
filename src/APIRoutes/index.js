@@ -5,6 +5,6 @@ const changeCourseStatus = require('./changeCourseStatus');
 const router = express.Router();
 
 router.post('/reorder-sections', VerifyAuthenticationStrict.verify, reorderSections.call);
-router.post('/change-course-status', VerifyAuthenticationStrict.verify, changeCourseStatus.call);
+router.post('/change-course-status', changeCourseStatus.call);
 
 module.exports = router;
