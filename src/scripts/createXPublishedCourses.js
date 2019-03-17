@@ -14,7 +14,7 @@ const createXCourses = async () => {
     for (let i = 0; i < 40; i++) {
       console.log('course started');
       const courseObj = {
-        title: `Course ${ i + 1 }`,
+        title: `coolio ${ i + 1 }`,
         description: `Course description ${ i + 1 }`,
         category: `Course description ${ i + 1 }`,
         color: '#9068be',
@@ -24,7 +24,7 @@ const createXCourses = async () => {
         date: new Date().toISOString(),
         status: 'Approved',
         rating: 0,
-        creator: '5c895a2748de2f0011dbc133',
+        creator: '5c8d7b84e9f0390011012533',
         summary: `Course summary ${ i + 1 }`
       };
       
@@ -32,7 +32,7 @@ const createXCourses = async () => {
       course.publishedCourse = courseObj;
       
       await course.save();
-      const user = await User.findById('5c895a2748de2f0011dbc133');
+      const user = await User.findById('5c8d7b84e9f0390011012533');
       if(!user) console.log('no user');
       user.createdCourses.push(course);
       await user.save();

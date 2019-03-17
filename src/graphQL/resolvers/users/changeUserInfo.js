@@ -10,9 +10,9 @@ exports.changeUserInfo = async (args, req) => {
     const user = await User.findById(req.userId);
     user.email = args.email;
     user.name = args.name;
-    user.token = await createUserToken(user);
+    const token = await createUserToken(user);
     await user.save();
-    return TransformObject(user);
+    return { token, ...TransformObject(user) };
   } catch (e) {
     throw e;
   }
