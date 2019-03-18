@@ -1,7 +1,7 @@
 exports.returnFileLocation = (req, res) => {
   try {
     if (req.file.location) {
-      const link = `http://djcdxouzulxic.cloudfront.net/${ req.file.originalname }`;
+      const link = `https://djcdxouzulxic.cloudfront.net/${ req.file.originalname }`;
       const currentSection = req.headers.currentsection;
       res.status(200).json({
         link,
