@@ -23,7 +23,8 @@ const upload = multer({
     },
   }),
   fileFilter: (req, file, cb) => {
-    if (videoExtensions.some(ext => file.originalname.endsWith("." + ext))) {
+    const uploadedExtension = file.originalname.split('.').pop();
+    if (videoExtensions.some(ext => ext.toLowerCase() === uploadedExtension.toLowerCase() )) {
       req.fileValidationError = false;
       return cb(null, true);
     }

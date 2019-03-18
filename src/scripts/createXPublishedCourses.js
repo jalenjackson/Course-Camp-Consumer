@@ -11,7 +11,7 @@ mongoose.connect(`mongodb+srv://jalenjackson:dumofkH3BtYq9yZv@coursecamp-qxarr.m
 
 const createXCourses = async () => {
   try {
-    for (let i = 0; i < 40; i++) {
+    for (let i = 0; i < 2; i++) {
       console.log('course started');
       const courseObj = {
         title: `coolio ${ i + 1 }`,
@@ -24,7 +24,7 @@ const createXCourses = async () => {
         date: new Date().toISOString(),
         status: 'Approved',
         rating: 0,
-        creator: '5c8d7b84e9f0390011012533',
+        creator: '5c8df7c0249d4700117b20df',
         summary: `Course summary ${ i + 1 }`
       };
       
@@ -32,7 +32,7 @@ const createXCourses = async () => {
       course.publishedCourse = courseObj;
       
       await course.save();
-      const user = await User.findById('5c8d7b84e9f0390011012533');
+      const user = await User.findById('5c8df7c0249d4700117b20df');
       if(!user) console.log('no user');
       user.createdCourses.push(course);
       await user.save();
