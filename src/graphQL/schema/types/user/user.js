@@ -14,6 +14,8 @@ exports.User = `
     xp: Float!
     payoutHistory: [Payout]
     profileImage: String
+    forgotPasswordToken: String
+    forgotPasswordDate: String
   }
   
   type AuthData {

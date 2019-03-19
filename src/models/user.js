@@ -47,6 +47,12 @@ const UserSchema = new Schema({
   },
   profileImage: {
     type: String
+  },
+  forgotPasswordToken: {
+    type: String
+  },
+  forgotPasswordDate: {
+    type: String
   }
 });
 

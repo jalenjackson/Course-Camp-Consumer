@@ -3,7 +3,6 @@ const Course =  require('../models/course');
 exports.call = async (req, res) => {
   if (req.body.devKey === process.env.devKey) {
     const course = await Course.findById(req.body.courseId);
-    console.log(req.body);
     course.status = req.body.status;
   
     switch (req.body.status) {

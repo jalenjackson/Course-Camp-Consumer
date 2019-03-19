@@ -4,4 +4,6 @@ exports.userMutations = `
   handlePayout(receiver: String!, amount: Float!): User
   uploadProfileImage(image: String!): User
   changeUserInfo(name: String, email: String): User
+  forgotPassword(email: String): User
+  changePassword(password: String, userId: String): User
 `;
