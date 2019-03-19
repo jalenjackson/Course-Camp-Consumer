@@ -8,7 +8,7 @@ exports.getUser = async (args, req) => {
     const token = await jwt.sign({
       userId: user._id,
     }, process.env.JWT_SECRET_KEY, {
-      expiresIn: '1h'
+      expiresIn: '3d'
     });
     return { token, ...TransformObject(user) };
   } catch (e) {
