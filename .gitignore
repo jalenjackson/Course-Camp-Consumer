@@ -3,5 +3,7 @@
 .idea
 /src/scripts
 .env
+docker-compose-prod.yml
+docker-compose.yml
 
 npm-debug.log*
