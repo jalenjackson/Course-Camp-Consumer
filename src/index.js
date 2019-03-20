@@ -15,7 +15,7 @@ const PORT = process.env.PORT || 8080;
 
 const mongoEnv = dev ? 'development' : 'production';
 
-mongoose.connect(`mongodb+srv://${ process.env.MONGO_USER }:${ process.env.MONGO_PASSWORD }@coursecamp-qxarr.mongodb.net/${ mongoEnv }?retryWrites=true`,
+mongoose.connect(`mongodb+srv://${ process.env.MONGO_USER }:${ process.env.MONGO_PASSWORD }@coursecamp-qxarr.mongodb.net/${ 'production' }?retryWrites=true`,
   { useNewUrlParser: true });
 
 const app = express();
