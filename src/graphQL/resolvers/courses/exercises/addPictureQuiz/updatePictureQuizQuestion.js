@@ -3,8 +3,8 @@ const { TransformObject } = require('../../merge');
 const aws = require('aws-sdk');
 
 aws.config.update({
-  secretAccessKey: process.env.AWS_SECRET,
-  accessKeyId: process.env.AWS_ACCESS_KEY,
+  secretAccessKey: process.env.AWS_SECRET_COURSE_CAMP,
+  accessKeyId: process.env.AWS_ACCESS_KEY_COURSE_CAMP,
   region: 'us-east-1',
 });
 
